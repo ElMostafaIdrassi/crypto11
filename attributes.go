@@ -16,13 +16,15 @@ type Attribute = pkcs11.Attribute
 
 //noinspection GoUnusedConst,GoDeprecation
 const (
-	CkaClass                  = AttributeType(0x00000000)
-	CkaToken                  = AttributeType(0x00000001)
-	CkaPrivate                = AttributeType(0x00000002)
-	CkaLabel                  = AttributeType(0x00000003)
-	CkaApplication            = AttributeType(0x00000010)
-	CkaValue                  = AttributeType(0x00000011)
-	CkaObjectId               = AttributeType(0x00000012)
+	CkaClass   = AttributeType(0x00000000)
+	CkaToken   = AttributeType(0x00000001)
+	CkaPrivate = AttributeType(0x00000002)
+	CkaLabel   = AttributeType(0x00000003)
+
+	CkaApplication = AttributeType(0x00000010)
+	CkaValue       = AttributeType(0x00000011)
+	CkaObjectId    = AttributeType(0x00000012)
+
 	CkaCertificateType        = AttributeType(0x00000080)
 	CkaIssuer                 = AttributeType(0x00000081)
 	CkaSerialNumber           = AttributeType(0x00000082)
@@ -36,23 +38,25 @@ const (
 	CkaHashOfSubjectPublicKey = AttributeType(0x0000008A)
 	CkaHashOfIssuerPublicKey  = AttributeType(0x0000008B)
 	CkaNameHashAlgorithm      = AttributeType(0x0000008C)
-	CkaCheckValue             = AttributeType(0x00000090)
 
-	CkaKeyType         = AttributeType(0x00000100)
-	CkaSubject         = AttributeType(0x00000101)
-	CkaId              = AttributeType(0x00000102)
-	CkaSensitive       = AttributeType(0x00000103)
-	CkaEncrypt         = AttributeType(0x00000104)
-	CkaDecrypt         = AttributeType(0x00000105)
-	CkaWrap            = AttributeType(0x00000106)
-	CkaUnwrap          = AttributeType(0x00000107)
-	CkaSign            = AttributeType(0x00000108)
-	CkaSignRecover     = AttributeType(0x00000109)
-	CkaVerify          = AttributeType(0x0000010A)
-	CkaVerifyRecover   = AttributeType(0x0000010B)
-	CkaDerive          = AttributeType(0x0000010C)
-	CkaStartDate       = AttributeType(0x00000110)
-	CkaEndDate         = AttributeType(0x00000111)
+	CkaCheckValue = AttributeType(0x00000090)
+
+	CkaKeyType       = AttributeType(0x00000100)
+	CkaSubject       = AttributeType(0x00000101)
+	CkaId            = AttributeType(0x00000102)
+	CkaSensitive     = AttributeType(0x00000103)
+	CkaEncrypt       = AttributeType(0x00000104)
+	CkaDecrypt       = AttributeType(0x00000105)
+	CkaWrap          = AttributeType(0x00000106)
+	CkaUnwrap        = AttributeType(0x00000107)
+	CkaSign          = AttributeType(0x00000108)
+	CkaSignRecover   = AttributeType(0x00000109)
+	CkaVerify        = AttributeType(0x0000010A)
+	CkaVerifyRecover = AttributeType(0x0000010B)
+	CkaDerive        = AttributeType(0x0000010C)
+	CkaStartDate     = AttributeType(0x00000110)
+	CkaEndDate       = AttributeType(0x00000111)
+
 	CkaModulus         = AttributeType(0x00000120)
 	CkaModulusBits     = AttributeType(0x00000121)
 	CkaPublicExponent  = AttributeType(0x00000122)
@@ -63,10 +67,10 @@ const (
 	CkaExponent2       = AttributeType(0x00000127)
 	CkaCoefficient     = AttributeType(0x00000128)
 	CkaPublicKeyInfo   = AttributeType(0x00000129)
-	CkaPrime           = AttributeType(0x00000130)
-	CkaSubprime        = AttributeType(0x00000131)
-	CkaBase            = AttributeType(0x00000132)
 
+	CkaPrime        = AttributeType(0x00000130)
+	CkaSubprime     = AttributeType(0x00000131)
+	CkaBase         = AttributeType(0x00000132)
 	CkaPrimeBits    = AttributeType(0x00000133)
 	CkaSubprimeBits = AttributeType(0x00000134)
 	/* (To retain backwards-compatibility) */
@@ -82,7 +86,6 @@ const (
 
 	CkaModifiable = AttributeType(0x00000170)
 	CkaCopyable   = AttributeType(0x00000171)
-
 	/* new for v2.40 */
 	CkaDestroyable = AttributeType(0x00000172)
 
@@ -90,22 +93,15 @@ const (
 	 * CKA_EC_PARAMS is preferred. */
 	CkaEcdsaParams = AttributeType(0x00000180)
 	CkaEcParams    = AttributeType(0x00000180)
-
-	CkaEcPoint = AttributeType(0x00000181)
+	CkaEcPoint     = AttributeType(0x00000181)
 
 	/* CKA_SECONDARY_AUTH, CKA_AUTH_PIN_FLAGS,
 	 * are new for v2.10. Deprecated in v2.11 and onwards. */
-	CkaSecondaryAuth = AttributeType(0x00000200) /* Deprecated */
-	CkaAuthPinFlags  = AttributeType(0x00000201) /* Deprecated */
-
+	CkaSecondaryAuth      = AttributeType(0x00000200) /* Deprecated */
+	CkaAuthPinFlags       = AttributeType(0x00000201) /* Deprecated */
 	CkaAlwaysAuthenticate = AttributeType(0x00000202)
 
 	CkaWrapWithTrusted = AttributeType(0x00000210)
-
-	ckfArrayAttribute = AttributeType(0x40000000)
-
-	CkaWrapTemplate   = ckfArrayAttribute | AttributeType(0x00000211)
-	CkaUnwrapTemplate = ckfArrayAttribute | AttributeType(0x00000212)
 
 	CkaOtpFormat               = AttributeType(0x00000220)
 	CkaOtpLength               = AttributeType(0x00000221)
@@ -115,12 +111,12 @@ const (
 	CkaOtpTimeRequirement      = AttributeType(0x00000225)
 	CkaOtpCounterRequirement   = AttributeType(0x00000226)
 	CkaOtpPinRequirement       = AttributeType(0x00000227)
-	CkaOtpCounter              = AttributeType(0x0000022E)
-	CkaOtpTime                 = AttributeType(0x0000022F)
 	CkaOtpUserIdentifier       = AttributeType(0x0000022A)
 	CkaOtpServiceIdentifier    = AttributeType(0x0000022B)
 	CkaOtpServiceLogo          = AttributeType(0x0000022C)
 	CkaOtpServiceLogoType      = AttributeType(0x0000022D)
+	CkaOtpCounter              = AttributeType(0x0000022E)
+	CkaOtpTime                 = AttributeType(0x0000022F)
 
 	CkaGOSTR3410Params = AttributeType(0x00000250)
 	CkaGOSTR3411Params = AttributeType(0x00000251)
@@ -130,21 +126,29 @@ const (
 	CkaResetOnInit   = AttributeType(0x00000301)
 	CkaHasReset      = AttributeType(0x00000302)
 
-	CkaPixelX                 = AttributeType(0x00000400)
-	CkaPixelY                 = AttributeType(0x00000401)
-	CkaResolution             = AttributeType(0x00000402)
-	CkaCharRows               = AttributeType(0x00000403)
-	CkaCharColumns            = AttributeType(0x00000404)
-	CkaColor                  = AttributeType(0x00000405)
-	CkaBitsPerPixel           = AttributeType(0x00000406)
-	CkaCharSets               = AttributeType(0x00000480)
-	CkaEncodingMethods        = AttributeType(0x00000481)
-	CkaMimeTypes              = AttributeType(0x00000482)
+	CkaPixelX       = AttributeType(0x00000400)
+	CkaPixelY       = AttributeType(0x00000401)
+	CkaResolution   = AttributeType(0x00000402)
+	CkaCharRows     = AttributeType(0x00000403)
+	CkaCharColumns  = AttributeType(0x00000404)
+	CkaColor        = AttributeType(0x00000405)
+	CkaBitsPerPixel = AttributeType(0x00000406)
+
+	CkaCharSets        = AttributeType(0x00000480)
+	CkaEncodingMethods = AttributeType(0x00000481)
+	CkaMimeTypes       = AttributeType(0x00000482)
+
 	CkaMechanismType          = AttributeType(0x00000500)
 	CkaRequiredCmsAttributes  = AttributeType(0x00000501)
 	CkaDefaultCmsAttributes   = AttributeType(0x00000502)
 	CkaSupportedCmsAttributes = AttributeType(0x00000503)
-	CkaAllowedMechanisms      = ckfArrayAttribute | AttributeType(0x00000600)
+
+	CkaWrapTemplate      = AttributeType(pkcs11.CKF_ARRAY_ATTRIBUTE) | AttributeType(0x00000211)
+	CkaUnwrapTemplate    = AttributeType(pkcs11.CKF_ARRAY_ATTRIBUTE) | AttributeType(0x00000212)
+	CkaDeriveTemplate    = AttributeType(pkcs11.CKF_ARRAY_ATTRIBUTE) | AttributeType(0x00000213)
+	CkaAllowedMechanisms = AttributeType(pkcs11.CKF_ARRAY_ATTRIBUTE) | AttributeType(0x00000600)
+
+	CkaVendorDefined = AttributeType(1 << 31)
 )
 
 // NewAttribute is a helper function that populates a new Attribute for common data types. This function will
@@ -423,13 +427,12 @@ func attributeTypeString(a AttributeType) string {
 	case CkaWrapWithTrusted:
 		return "CkaWrapWithTrusted"
 
-	case ckfArrayAttribute:
-		return "ckfArrayAttribute"
-
 	case CkaWrapTemplate:
 		return "CkaWrapTemplate"
 	case CkaUnwrapTemplate:
 		return "CkaUnwrapTemplate"
+	case CkaDeriveTemplate:
+		return "CkaDeriveTemplate"
 
 	case CkaOtpFormat:
 		return "CkaOtpFormat"
@@ -504,6 +507,8 @@ func attributeTypeString(a AttributeType) string {
 		return "CkaSupportedCmsAttributes"
 	case CkaAllowedMechanisms:
 		return "CkaAllowedMechanisms"
+	case CkaVendorDefined:
+		return "CkaVendorDefined"
 	default:
 		return "Unknown"
 	}
