@@ -49,13 +49,15 @@ A minimal configuration file looks like this:
 {
   "Path" : "/usr/lib/softhsm/libsofthsm2.so",
   "TokenLabel": "token1",
-  "Pin" : "password"
+  "Pin" : "password",
+  "OpenRWSessions": true
 }
 ```
 
 - `Path` points to the library from your PKCS#11 vendor.
 - `TokenLabel` is the `CKA_LABEL` of the token you wish to use.
 - `Pin` is the password for the `CKU_USER` user.
+- `OpenRWSessions` determines whether to open a Read-Write or Read-Only session, depending on the use case.
 
 Testing Guidance
 ================
@@ -88,6 +90,7 @@ A minimal configuration file for CloudHSM will look like this:
   "TokenLabel": "cavium",
   "Pin" : "username:password",
   "UseGCMIVFromHSM" : true,
+  "OpenRWSessions": true
 }
 ```
 
@@ -139,7 +142,8 @@ The configuration looks like this:
     {
       "Path" : "/usr/lib/softhsm/libsofthsm2.so",
       "TokenLabel": "test",
-      "Pin" : "password"
+      "Pin" : "password",
+      "OpenRWSessions": true
     }
 
 (At time of writing) OAEP is only partial and HMAC is unsupported, so expect test skips.
@@ -157,7 +161,8 @@ To protect keys with a 1/N operator cardset:
     {
       "Path" : "/opt/nfast/toolkits/pkcs11/libcknfast.so",
       "TokenLabel": "rjk",
-      "Pin" : "password"
+      "Pin" : "password",
+      "OpenRWSessions": true
     }
 
 You can also identify the token by serial number, which in this case
@@ -167,7 +172,8 @@ means the first 16 hex digits of the operator cardset's token hash:
     {
       "Path" : "/opt/nfast/toolkits/pkcs11/libcknfast.so",
       "TokenSerial": "1d42780caa22efd5",
-      "Pin" : "password"
+      "Pin" : "password",
+      "OpenRWSessions": true
     }
 
 A card from the cardset must be in the slot when you run `go test`.
@@ -178,7 +184,8 @@ To protect keys with the module only, use the 'accelerator' token:
     {
       "Path" : "/opt/nfast/toolkits/pkcs11/libcknfast.so",
       "TokenLabel": "accelerator",
-      "Pin" : "password"
+      "Pin" : "password",
+      "OpenRWSessions": true
     }
 
 (At time of writing) GCM is not implemented, so expect test skips.

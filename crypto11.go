@@ -181,6 +181,8 @@ type Context struct {
 	// persistentSession is a session held open so we can be confident handles and login status
 	// persist for the duration of this context
 	persistentSession pkcs11.SessionHandle
+
+	openRWSessions bool
 }
 
 // Signer is a PKCS#11 key that implements crypto.Signer.
@@ -254,6 +256,10 @@ type Config struct {
 	// LoginNotSupported should be set to true for tokens that do not support logging in.
 	LoginNotSupported bool
 
+	// OpenRWSessions should be set to true for tokens that support opening Read-Write Sessions, and
+	// if the use case requires opening Read-Write Sessions.
+	OpenRWSessions bool
+
 	// UseGCMIVFromHSM should be set to true for tokens such as CloudHSM, which ignore the supplied IV for
 	// GCM mode and generate their own. In this case, the token will write the IV used into the CK_GCM_PARAMS.
 	// If UseGCMIVFromHSM is true, we will copy this IV and overwrite the 'nonce' slice passed to Seal and Open. It
@@ -316,8 +322,9 @@ func Configure(config *Config) (*Context, error) {
 	}
 
 	instance := &Context{
-		cfg: config,
-		ctx: pkcs11.New(config.Path),
+		cfg:            config,
+		ctx:            pkcs11.New(config.Path),
+		openRWSessions: config.OpenRWSessions,
 	}
 
 	if instance.ctx == nil {
@@ -362,7 +369,11 @@ func Configure(config *Config) (*Context, error) {
 
 	// Create a long-term session and log it in (if supported). This session won't be used by callers, instead it is
 	// used to keep a connection alive to the token to ensure object handles and the log in status remain accessible.
-	instance.persistentSession, err = instance.ctx.OpenSession(instance.slot, pkcs11.CKF_SERIAL_SESSION|pkcs11.CKF_RW_SESSION)
+	openSessionFlags := uint(pkcs11.CKF_SERIAL_SESSION)
+	if config.OpenRWSessions {
+		openSessionFlags |= pkcs11.CKF_RW_SESSION
+	}
+	instance.persistentSession, err = instance.ctx.OpenSession(instance.slot, openSessionFlags)
 	if err != nil {
 		_ = instance.ctx.Finalize()
 		instance.ctx.Destroy()
