@@ -35,12 +35,13 @@ type AttributeType = uint
 // Attribute represents a PKCS#11 CK_ATTRIBUTE type.
 type Attribute = pkcs11.Attribute
 
-//noinspection GoUnusedConst,GoDeprecation
+// noinspection GoUnusedConst,GoDeprecation
 const (
 	CkaClass                  = AttributeType(0x00000000)
 	CkaToken                  = AttributeType(0x00000001)
 	CkaPrivate                = AttributeType(0x00000002)
 	CkaLabel                  = AttributeType(0x00000003)
+	CkaUniqueId               = AttributeType(0x00000004)
 	CkaApplication            = AttributeType(0x00000010)
 	CkaValue                  = AttributeType(0x00000011)
 	CkaObjectId               = AttributeType(0x00000012)
@@ -124,9 +125,9 @@ const (
 	CkaWrapWithTrusted = AttributeType(0x00000210)
 
 	ckfArrayAttribute = AttributeType(0x40000000)
-
 	CkaWrapTemplate   = ckfArrayAttribute | AttributeType(0x00000211)
 	CkaUnwrapTemplate = ckfArrayAttribute | AttributeType(0x00000212)
+	CkaDeriveTemplate = ckfArrayAttribute | AttributeType(0x00000213)
 
 	CkaOtpFormat               = AttributeType(0x00000220)
 	CkaOtpLength               = AttributeType(0x00000221)
@@ -136,12 +137,12 @@ const (
 	CkaOtpTimeRequirement      = AttributeType(0x00000225)
 	CkaOtpCounterRequirement   = AttributeType(0x00000226)
 	CkaOtpPinRequirement       = AttributeType(0x00000227)
-	CkaOtpCounter              = AttributeType(0x0000022E)
-	CkaOtpTime                 = AttributeType(0x0000022F)
 	CkaOtpUserIdentifier       = AttributeType(0x0000022A)
 	CkaOtpServiceIdentifier    = AttributeType(0x0000022B)
 	CkaOtpServiceLogo          = AttributeType(0x0000022C)
 	CkaOtpServiceLogoType      = AttributeType(0x0000022D)
+	CkaOtpCounter              = AttributeType(0x0000022E)
+	CkaOtpTime                 = AttributeType(0x0000022F)
 
 	CkaGOSTR3410Params = AttributeType(0x00000250)
 	CkaGOSTR3411Params = AttributeType(0x00000251)
@@ -166,6 +167,36 @@ const (
 	CkaDefaultCmsAttributes   = AttributeType(0x00000502)
 	CkaSupportedCmsAttributes = AttributeType(0x00000503)
 	CkaAllowedMechanisms      = ckfArrayAttribute | AttributeType(0x00000600)
+	CkaProfileId              = AttributeType(0x00000601)
+
+	/* Additional X2Ratchet attributes */
+	CkaX2RatchetBag        = AttributeType(0x00000602)
+	CkaX2RatchetBagSize    = AttributeType(0x00000603)
+	CkaX2RatchetBobs1stMsg = AttributeType(0x00000604)
+	CkaX2RatchetCkr        = AttributeType(0x00000605)
+	CkaX2RatchetCks        = AttributeType(0x00000606)
+	CkaX2RatchetDhp        = AttributeType(0x00000607)
+	CkaX2RatchetDhr        = AttributeType(0x00000608)
+	CkaX2RatchetDhs        = AttributeType(0x00000609)
+	CkaX2RatchetHkr        = AttributeType(0x0000060a)
+	CkaX2RatchetHks        = AttributeType(0x0000060b)
+	CkaX2RatchetIsAlice    = AttributeType(0x0000060c)
+	CkaX2RatchetNhkr       = AttributeType(0x0000060d)
+	CkaX2RatchetNhks       = AttributeType(0x0000060e)
+	CkaX2RatchetNr         = AttributeType(0x0000060f)
+	CkaX2RatchetNs         = AttributeType(0x00000610)
+	CkaX2RatchetPns        = AttributeType(0x00000611)
+	CkaX2RatchetRk         = AttributeType(0x00000612)
+
+	/* HSS */
+	CkaHssLevels        = AttributeType(0x00000617)
+	CkaHssLmsType       = AttributeType(0x00000618)
+	CkaHssLmotsType     = AttributeType(0x00000619)
+	CkaHssLmsTypes      = AttributeType(0x0000061a)
+	CkaHssLmotsTypes    = AttributeType(0x0000061b)
+	CkaHssKeysRemaining = AttributeType(0x0000061c)
+
+	CkaVendorDefined = AttributeType(0x80000000)
 )
 
 // NewAttribute is a helper function that populates a new Attribute for common data types. This function will
